@@ -1,0 +1,27 @@
+<% if @article.errors.any? %>
+    <h2>The following errors prevented the article from being saved</h2>
+    <ul>
+        <% @article.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+        <%end%>
+    </ul>
+<%end%>
+
+
+<!-- 참고로 이부분은 리팩터링 전 new와는 다르지만 new에서 쓰는건 빈 오브젝트, edit에서 쓰는건 db에 있는 오브젝트.. 
+그러나 차피 빈 오브젝트는 아무것도 안띄우기 때문에 동일!! -->
+<%= form_with(model: @article, local: true) do |form| %>
+    <p>
+        <%= form.label :title %><br/>
+        <%= form.text_field :title %>
+    </p>
+
+    <p>
+        <%= form.label :description %><br/>
+        <%= form.text_area :description %>
+    </p>
+
+    <p>
+        <%= form.submit %>
+    </p>
+<% end %>
